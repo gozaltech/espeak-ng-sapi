@@ -9,7 +9,7 @@ This project is designed with future open-source publication in mind.
 The latest stable installer is available at:
 
 - **eSpeak-NG SAPI 1.1.0**  
-  http://gozaltech/org/EspeakSAPI_Setup_1.1.0.exe
+  http://gozaltech.org/EspeakSAPI_Setup_1.1.0.exe
 
 ## Source Code Availability
 
