@@ -1,0 +1,84 @@
+#include <windows.h>
+#include <commctrl.h>
+#include "resource.h"
+
+IDD_MAIN_DIALOG DIALOGEX 0, 0, 480, 500
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "eSpeak-NG SAPI Voice Configurator"
+FONT 9, "Segoe UI"
+BEGIN
+    GROUPBOX        "Available Voices", IDC_STATIC, 10, 10, 220, 300
+    CONTROL         "Show only default voice (en-us)", IDC_CHECK_DEFAULT_ONLY,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 20, 25, 200, 12
+    CONTROL         "", IDC_LIST_VOICES, WC_LISTVIEW,
+                    LVS_REPORT | LVS_SINGLESEL | LVS_NOCOLUMNHEADER | WS_BORDER | WS_VSCROLL | WS_TABSTOP,
+                    20, 45, 200, 220
+    PUSHBUTTON      "Select All", IDC_BTN_SELECT_ALL, 20, 275, 95, 20
+    PUSHBUTTON      "Deselect All", IDC_BTN_DESELECT_ALL, 125, 275, 95, 20
+
+    GROUPBOX        "Global Settings", IDC_STATIC, 240, 10, 230, 200
+    LTEXT           "Variant:", IDC_STATIC, 250, 30, 80, 10
+    COMBOBOX        IDC_COMBO_VARIANT, 250, 45, 200, 200,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Intonation (0-100):", IDC_STATIC, 250, 75, 100, 10
+    CONTROL         "", IDC_SLIDER_INTONATION, TRACKBAR_CLASS,
+                    TBS_AUTOTICKS | WS_TABSTOP, 250, 90, 150, 20
+    LTEXT           "50", IDC_LABEL_INTONATION, 410, 90, 40, 10
+    LTEXT           "Higher values = more expressive speech",
+                    IDC_STATIC, 250, 115, 200, 10
+    LTEXT           "Word Gap (0-100):", IDC_STATIC, 250, 130, 100, 10
+    CONTROL         "", IDC_SLIDER_WORDGAP, TRACKBAR_CLASS,
+                    TBS_AUTOTICKS | WS_TABSTOP, 250, 145, 150, 20
+    LTEXT           "0", IDC_LABEL_WORDGAP, 410, 145, 40, 10
+    LTEXT           "Pause between words (10ms units)",
+                    IDC_STATIC, 250, 170, 200, 10
+    CONTROL         "Rate boost (x3)", IDC_CHECK_RATEBOOST,
+                    "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 250, 188, 200, 12
+
+    GROUPBOX        "Voice Profiles", IDC_STATIC, 240, 220, 230, 90
+    CONTROL         "", IDC_LIST_PROFILES, WC_LISTVIEW,
+                    LVS_REPORT | LVS_SINGLESEL | LVS_NOCOLUMNHEADER | WS_BORDER | WS_VSCROLL | WS_TABSTOP,
+                    250, 240, 200, 40
+    PUSHBUTTON      "Add Profile...", IDC_BTN_ADD_PROFILE, 250, 285, 95, 20
+    PUSHBUTTON      "Remove", IDC_BTN_REMOVE_PROFILE, 355, 285, 95, 20
+
+    GROUPBOX        "Information", IDC_STATIC, 10, 320, 460, 140
+    LTEXT           "Configuration file: %APPDATA%\\espeak-ng-sapi\\config.json",
+                    IDC_STATIC, 20, 335, 440, 10
+    LTEXT           L"• Intonation changes take effect immediately",
+                    IDC_STATIC, 20, 355, 440, 10
+    LTEXT           L"• Voice list changes require restarting SAPI applications",
+                    IDC_STATIC, 20, 370, 440, 10
+    LTEXT           "Variants are loaded from eSpeak-NG data directory (100+ available)",
+                    IDC_STATIC, 20, 390, 440, 10
+    LTEXT           "Voice profiles create additional SAPI voices with specific variants.",
+                    IDC_STATIC, 20, 405, 440, 10
+    LTEXT           "Example: 'English Female 3' = en + f3 variant",
+                    IDC_STATIC, 20, 420, 440, 10
+
+    DEFPUSHBUTTON   "Save && Close", IDOK, 310, 470, 75, 20
+    PUSHBUTTON      "Cancel", IDCANCEL, 395, 470, 75, 20
+    PUSHBUTTON      "Open Config Folder", IDC_BTN_OPEN_FOLDER, 20, 470, 95, 20
+END
+
+IDD_PROFILE_DIALOG DIALOGEX 0, 0, 300, 160
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Voice Profile"
+FONT 9, "Segoe UI"
+BEGIN
+    LTEXT           "Profile Name:", IDC_STATIC, 20, 20, 80, 10
+    EDITTEXT        IDC_EDIT_PROFILE_NAME, 20, 35, 260, 14, ES_AUTOHSCROLL
+
+    LTEXT           "Base Voice:", IDC_STATIC, 20, 60, 80, 10
+    COMBOBOX        IDC_COMBO_BASE_VOICE, 20, 75, 260, 200,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    LTEXT           "Variant:", IDC_STATIC, 20, 105, 80, 10
+    COMBOBOX        IDC_COMBO_PROFILE_VARIANT, 20, 120, 260, 200,
+                    CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+
+    DEFPUSHBUTTON   "OK", IDOK, 135, 145, 70, 20
+    PUSHBUTTON      "Cancel", IDCANCEL, 210, 145, 70, 20
+END
+
+// IDI_APPICON ICON "icon.ico"

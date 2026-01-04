@@ -1,50 +1,71 @@
-# eSpeak-NG SAPI
+# eSpeak-NG SAPI5 Wrapper
 
-eSpeak-NG SAPI is a Windows Speech API (SAPI) implementation that enables the use of the eSpeak-NG speech synthesizer with SAPI-compatible applications, including assistive technologies such as screen readers.
+A native Windows SAPI5 wrapper for the eSpeak-NG text-to-speech engine, enabling eSpeak-NG voices to work with any SAPI5-compatible application including screen readers (NVDA, JAWS, Windows Narrator) and book reader applications (Balabolka, Bookworm).
 
-This project is designed with future open-source publication in mind.
+> **Note:** This is early-stage software under active development. Some bugs and issues may be expected. Please report any problems you encounter!
+
+## Features
+
+- **Native Multi-Architecture Support** - Full x86 and x64 support on Windows
+- **100+ Languages and Voices** - Access to all eSpeak-NG voices and language variants
+- **SAPI5 Integration** - Works seamlessly with any SAPI5-compatible Windows application
+- **GUI Configuration Tool** - Easy-to-use interface for voice customization
+- **Configurable Voice Profiles** - Customize rate, pitch, volume, intonation, and word gap per voice
 
 ## Download
 
-The latest stable installer is available at:
+Download the latest release from the [Releases](../../releases) page.
 
-- **eSpeak-NG SAPI 1.1.0**  
-  http://gozaltech.org/EspeakSAPI_Setup_1.1.0.exe
+## Building from Source
 
-## Source Code Availability
+```batch
+build_all.bat
+```
 
-The source code for this project is planned to be released publicly.  
-The timeline for publication depends on user interest, adoption, and community support to ensure sustainable development and long-term maintenance.
+**Requirements:**
+- Windows 10 or later
+- Visual Studio 2022+ or LLVM Clang-CL
+- CMake 4.0+
+- Ninja build system
 
-## Open-Source Readiness
+## Contributing
 
-The project is being prepared for open-source release, including:
-- Codebase cleanup and internal documentation
-- Build and packaging reproducibility
-- Dependency review and stability verification
+Contributions are welcome! Here's how you can help:
 
-Further technical details will be provided closer to the public source code release.
+### Reporting Issues
 
-## Bug Reports and Feature Requests
+Found a bug or have a feature request? Please [open an issue](../../issues) with:
+- Clear description of the problem or feature
+- Steps to reproduce (for bugs)
+- Your Windows version and architecture (x86/x64)
+- Relevant logs if available
 
-Bug reports and feature requests are welcome and encouraged.
+### Submitting Pull Requests
 
-Please report bugs and submit feature requests using the **Issues** section of the project repository:
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature-name`)
+3. Make your changes
+4. Test on both x86 and x64 architectures
+5. Commit your changes
+6. Push to your branch
+7. [Create a Pull Request](../../pulls)
 
-- https://github.com/gozaltech/espeak-ng-sapi/issues
+Please ensure your code follows the existing style.
 
-When creating an issue, please include:
-- Windows version
-- Application or assistive technology used
-- Clear steps to reproduce the issue
-- Expected behavior and actual behavior
+## Support the Project
 
-Clear and concise reports help ensure efficient resolution.
+If you find this project helpful, consider supporting its development:
 
-## Project Support
+[![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/gozaltech)
 
-If you wish to support the development and future open-source release of this project, you may do so at:
+Your support helps maintain and improve this project!
 
-- https://paypal.me/gozaltech
+## License
 
-Community support directly contributes to ongoing development, bug fixes, and feature improvements.
+This SAPI5 wrapper is open source software.
+eSpeak-NG is licensed under GPL v3.
+
+## Credits
+
+- **eSpeak-NG Project:** https://github.com/espeak-ng/espeak-ng
+- **Original eSpeak:** Jonathan Duddington
