@@ -1,5 +1,5 @@
 #define MyAppName "eSpeak-NG SAPI"
-#define MyAppVersion "1.2.0"
+#define MyAppVersion "1.2.1"
 #define MyAppPublisher "gozaltech"
 #define MyAppURL "https://gozaltech.org"
 

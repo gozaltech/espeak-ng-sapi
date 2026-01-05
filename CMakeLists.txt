@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 4.0)
 cmake_policy(SET CMP0091 NEW)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-project(EspeakSAPI VERSION 1.2.0 LANGUAGES C CXX)
+project(EspeakSAPI VERSION 1.2.1 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -57,8 +57,8 @@ endfunction()
 
 FetchContent_Declare(
     espeak-ng
-    GIT_REPOSITORY https://github.com/espeak-ng/espeak-ng.git
-    GIT_TAG master
+    GIT_REPOSITORY https://github.com/gozaltech/espeak-ng.git
+    GIT_TAG dev
     GIT_SHALLOW TRUE
 )
 
@@ -72,6 +72,7 @@ set(USE_SPEECHPLAYER ON CACHE BOOL "Enable SpeechPlayer support" FORCE)
 set(EXTRA_cmn ON CACHE BOOL "Enable extra cmn language" FORCE)
 set(EXTRA_ru ON CACHE BOOL "Enable extra ru language" FORCE)
 set(ENABLE_TESTS OFF CACHE BOOL "Disable espeak-ng tests" FORCE)
+set(ENABLE_EMOJI_DICTIONARIES OFF CACHE BOOL "Disable compiling emojies" FORCE)
 
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(X86_DATA_PATH "${CMAKE_BINARY_DIR}/../build_x86/_deps/espeak-ng-build/espeak-ng-data")
@@ -100,6 +101,7 @@ FetchContent_Declare(
     json
     URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
     DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+    DOWNLOAD_NO_PROGRESS TRUE
 )
 FetchContent_MakeAvailable(json)
 
