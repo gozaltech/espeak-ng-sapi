@@ -15,10 +15,12 @@
 #define IDC_SLIDER_WORDGAP              1007
 #define IDC_LABEL_WORDGAP               1008
 #define IDC_CHECK_RATEBOOST             1009
-#define IDC_LIST_PROFILES               1010
-#define IDC_BTN_ADD_PROFILE             1011
-#define IDC_BTN_REMOVE_PROFILE          1012
-#define IDC_BTN_OPEN_FOLDER             1013
+#define IDC_SLIDER_VOLUME              1010
+#define IDC_LABEL_VOLUME               1011
+#define IDC_LIST_PROFILES               1012
+#define IDC_BTN_ADD_PROFILE             1013
+#define IDC_BTN_REMOVE_PROFILE          1014
+#define IDC_BTN_OPEN_FOLDER             1015
 
 #define IDC_EDIT_PROFILE_NAME           2000
 #define IDC_COMBO_BASE_VOICE            2001

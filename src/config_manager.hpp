@@ -14,6 +14,8 @@ namespace limits {
     constexpr int INTONATION_MAX = 100;
     constexpr int WORDGAP_MIN = 0;
     constexpr int WORDGAP_MAX = 100;
+    constexpr int VOLUME_MIN = 0;
+    constexpr int VOLUME_MAX = 100;
 }
 
 struct VoiceProfile {
@@ -42,6 +44,7 @@ struct Configuration {
     std::string global_variant;
     int intonation;
     int wordgap;
+    int volume;
     bool rateboost;
     std::vector<VoiceProfile> voice_profiles;
 
