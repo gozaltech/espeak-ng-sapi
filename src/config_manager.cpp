@@ -35,6 +35,7 @@ void parseGlobalSettingsSection(const json& j, Configuration& config) {
         config.intonation = settings.value("intonation", 50);
         config.wordgap = settings.value("wordgap", 0);
         config.rateboost = settings.value("rateboost", false);
+		        config.volume = settings.value("volume", 100);
     }
 }
 
@@ -61,6 +62,8 @@ void clampConfigValues(Configuration& config) {
 
     if (config.wordgap < limits::WORDGAP_MIN) config.wordgap = limits::WORDGAP_MIN;
     if (config.wordgap > limits::WORDGAP_MAX) config.wordgap = limits::WORDGAP_MAX;
+
+    config.volume = std::clamp(config.volume, limits::VOLUME_MIN, limits::VOLUME_MAX);
 }
 
 void parseConfiguration(const json& j, Configuration& config) {
@@ -113,6 +116,7 @@ Configuration ConfigManager::createDefaultConfig() {
     config.enabled_voices.clear();
     config.global_variant = "";
     config.intonation = 50;
+    config.volume = 100;
     config.voice_profiles.clear();
     return config;
 }
@@ -187,6 +191,7 @@ bool ConfigManager::save(const Configuration& config) {
         j["global_settings"]["intonation"] = config.intonation;
         j["global_settings"]["wordgap"] = config.wordgap;
         j["global_settings"]["rateboost"] = config.rateboost;
+        j["global_settings"]["volume"] = config.volume;
 
         json profiles = json::array();
         for (const auto& profile : config.voice_profiles) {
@@ -265,8 +270,8 @@ void ConfigManager::checkAndReload() {
                 parseConfiguration(j, new_config);
 
                 config_ = new_config;
-                DEBUG_LOG("ConfigManager: Config reloaded successfully (intonation=%d, wordgap=%d, rateboost=%d)",
-                          config_.intonation, config_.wordgap, config_.rateboost);
+                DEBUG_LOG("ConfigManager: Config reloaded successfully (intonation=%d, wordgap=%d, rateboost=%d, volume=%d)",
+                          config_.intonation, config_.wordgap, config_.rateboost, config.volume);
             }
             catch (const json::exception& e) {
                 DEBUG_LOG("ConfigManager: JSON error during reload: %s", e.what());

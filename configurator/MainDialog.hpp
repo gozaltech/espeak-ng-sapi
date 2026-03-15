@@ -38,6 +38,7 @@ private:
     void PopulateProfileList();
     void UpdateIntonationLabel();
     void UpdateWordgapLabel();
+    void UpdateVolumeLabel();
     void UpdateUIState();
 
     void OnSelectAll();
@@ -62,6 +63,8 @@ private:
     HWND hLabelIntonation_;
     HWND hSliderWordgap_;
     HWND hLabelWordgap_;
+    HWND hSliderVolume_;
+    HWND hLabelVolume_;
     HWND hCheckRateboost_;
     HWND hListProfiles_;
     HWND hBtnRemoveProfile_;

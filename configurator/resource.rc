@@ -32,6 +32,12 @@ BEGIN
     LTEXT           "0", IDC_LABEL_WORDGAP, 410, 145, 40, 10
     LTEXT           "Pause between words (10ms units)",
                     IDC_STATIC, 250, 170, 200, 10
+
+    LTEXT           "Volume (0 muted - 100 normal):", IDC_STATIC, 250, 130, 100, 10
+    CONTROL         "", IDC_SLIDER_VOLUME, TRACKBAR_CLASS,
+                    TBS_AUTOTICKS | WS_TABSTOP, 250, 145, 150, 20
+    LTEXT           "0", IDC_LABEL_VOLUME, 410, 145, 40, 10
+
     CONTROL         "Rate boost (x3)", IDC_CHECK_RATEBOOST,
                     "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 250, 188, 200, 12
 

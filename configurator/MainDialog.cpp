@@ -80,6 +80,9 @@ void MainDialog::OnInitDialog() {
     hSliderWordgap_ = GetDlgItem(hwnd_, IDC_SLIDER_WORDGAP);
     hLabelWordgap_ = GetDlgItem(hwnd_, IDC_LABEL_WORDGAP);
     hCheckRateboost_ = GetDlgItem(hwnd_, IDC_CHECK_RATEBOOST);
+    hSliderVolume_ = GetDlgItem(hwnd_, IDC_SLIDER_VOLUME);
+    hLabelVolume_ = GetDlgItem(hwnd_, IDC_LABEL_VOLUME);
+
     hListProfiles_ = GetDlgItem(hwnd_, IDC_LIST_PROFILES);
     hBtnRemoveProfile_ = GetDlgItem(hwnd_, IDC_BTN_REMOVE_PROFILE);
 
@@ -97,6 +100,10 @@ void MainDialog::OnInitDialog() {
 
     SendMessage(hSliderWordgap_, TBM_SETRANGE, TRUE, MAKELPARAM(0, 100));
     SendMessage(hSliderWordgap_, TBM_SETTICFREQ, 10, 0);
+
+    SendMessage(hSliderVolume_, TBM_SETRANGE, TRUE, MAKELPARAM(0, 100));
+    SendMessage(hSliderVolume_, TBM_SETTICFREQ, 10, 0);
+
 
     LoadConfiguration();
     PopulateVariantCombo();
@@ -152,6 +159,8 @@ void MainDialog::OnHScroll(WPARAM wParam, LPARAM lParam) {
         UpdateIntonationLabel();
     } else if (hSlider == hSliderWordgap_) {
         UpdateWordgapLabel();
+    } else if (hSlider == hSliderVolume_) {
+        UpdateVolumeLabel();
     }
 }
 
@@ -175,6 +184,8 @@ void MainDialog::LoadConfiguration() {
     SendMessage(hSliderWordgap_, TBM_SETPOS, TRUE, config_.wordgap);
     UpdateWordgapLabel();
     SendMessage(hCheckRateboost_, BM_SETCHECK, config_.rateboost ? BST_CHECKED : BST_UNCHECKED, 0);
+    SendMessage(hSliderVolume_, TBM_SETPOS, TRUE, config_.volume);
+    UpdateVolumeLabel();
 }
 
 void MainDialog::SaveConfiguration() {
@@ -202,12 +213,13 @@ void MainDialog::SaveConfiguration() {
     config_.intonation = SendMessage(hSliderIntonation_, TBM_GETPOS, 0, 0);
     config_.wordgap = SendMessage(hSliderWordgap_, TBM_GETPOS, 0, 0);
     config_.rateboost = (SendMessage(hCheckRateboost_, BM_GETCHECK, 0, 0) == BST_CHECKED);
+    config_.volume = SendMessage(hSliderVolume_, TBM_GETPOS, 0, 0);
     config::ConfigManager& mgr = config::ConfigManager::getInstance();
     if (mgr.save(config_)) {
         MessageBox(hwnd_,
                    L"Configuration saved successfully.\n\n"
                    L"Changes take effect:\n"
-                   L"\u2022 Intonation/Word gap/Rate boost: Immediately for new speech\n"
+                   L"\u2022 Intonation/Word gap/Rate boost / volume: Immediately for new speech\n"
                    L"\u2022 Voice list/variants: Require restarting SAPI applications\n\n"
                    L"Applications using eSpeak-NG (screen readers, TTS software)\n"
                    L"will automatically detect parameter changes.",
@@ -353,6 +365,14 @@ void MainDialog::UpdateWordgapLabel() {
     std::wstring text = std::to_wstring(value);
     SetWindowText(hLabelWordgap_, text.c_str());
 }
+
+void MainDialog::UpdateVolumeLabel() {
+    int value = SendMessage(hSliderVolume_, TBM_GETPOS, 0, 0);
+    std::wstring text = std::to_wstring(value);
+    SetWindowText(hLabelVolume_, text.c_str());
+}
+
+
 
 void MainDialog::UpdateUIState() {
     bool defaultOnly = (SendMessage(hCheckDefaultOnly_, BM_GETCHECK, 0, 0) == BST_CHECKED);

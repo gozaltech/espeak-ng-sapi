@@ -400,6 +400,14 @@ STDMETHODIMP ISpTTSEngineImpl::Speak(
                 }
             }
 
+
+            config::ConfigManager& config_mgr = config::ConfigManager::getInstance();
+            config::Configuration cfg = config_mgr.getConfig();
+            int intonation = cfg.intonation;
+            int wordgap = cfg.wordgap;
+            bool rateboost = cfg.rateboost;
+            int config_volume = cfg.volume;
+
             int combined_rate = static_cast<int>(sapi_rate) + frag->State.RateAdj;
             combined_rate = std::clamp(combined_rate, MIN_RATE, MAX_RATE);
             int espeak_rate = combined_rate * RATE_TO_WPM_MULTIPLIER;
@@ -408,13 +416,7 @@ STDMETHODIMP ISpTTSEngineImpl::Speak(
             int espeak_pitch = BASE_PITCH + std::clamp(pitch_adj * PITCH_ADJ_MULTIPLIER, MIN_PITCH_ADJ, MAX_PITCH_ADJ);
 
             int volume_adj = (sapi_volume - MAX_VOLUME) + (frag->State.Volume - MAX_VOLUME);
-            int espeak_volume = std::clamp(static_cast<int>(sapi_volume) + volume_adj, MIN_VOLUME, MAX_VOLUME);
-
-            config::ConfigManager& config_mgr = config::ConfigManager::getInstance();
-            config::Configuration cfg = config_mgr.getConfig();
-            int intonation = cfg.intonation;
-            int wordgap = cfg.wordgap;
-            bool rateboost = cfg.rateboost;
+            int espeak_volume = std::clamp(static_cast<int>(sapi_volume) + volume_adj + (config_volume - 100), MIN_VOLUME, MAX_VOLUME);
 
             DEBUG_LOG("--- Parameters ---");
             DEBUG_LOG("  Rate: SAPI=%d -> eSpeak-range=%d%s", combined_rate, espeak_rate, rateboost ? " (will boost x3 at WPM level)" : "");
